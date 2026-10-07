@@ -23,6 +23,8 @@ try {
     die('Koneksi database gagal. Pastikan MySQL sudah berjalan dan database "website_kelas" sudah diimpor. Detail: ' . $e->getMessage());
 }
 
-// Base URL project, dipakai untuk link & path file (foto, dokumen, dll).
-// Sesuaikan jika nama folder project kamu berbeda dari "website-kelas".
-define('BASE_URL', '/website-kelas');
+// Tentukan URL dasar dari lokasi script agar tetap benar saat folder project
+// dipindah atau diakses melalui subfolder (misalnya /web-kelas/website-kelas-11-sija/website-kelas).
+$script_directory = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+$script_directory = preg_replace('~/admin$~', '', $script_directory);
+define('BASE_URL', rtrim($script_directory, '/'));

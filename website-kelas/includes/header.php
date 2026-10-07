@@ -21,7 +21,7 @@ $halaman_ini = basename($_SERVER['PHP_SELF']);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="<?= BASE_URL ?>/assets/img/favicon.jpg">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 </head>
 <body class="is-loading">
 
@@ -96,20 +96,22 @@ $halaman_ini = basename($_SERVER['PHP_SELF']);
 
 <header class="site-header">
     <div class="container header-inner">
-        <a href="<?= BASE_URL ?>/index.php" class="brand">
+       
+            <a href="<?= BASE_URL ?>/index.php" class="brand">
             <?php if (logo_ada($info['logo'] ?? null)): ?>
                 <img class="brand-mark brand-mark-img" src="<?= BASE_URL ?>/uploads/logo/<?= h($info['logo']) ?>" alt="Logo <?= h($nama_kelas) ?>">
             <?php else: ?>
                 <span class="brand-mark"><?= h(mb_substr($nama_kelas, 0, 1)) ?></span>
             <?php endif; ?>
             <span class="brand-name"><?= h($nama_kelas) ?></span>
-        </a>
-
+            </a>
+        
         <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
 
         <nav class="site-nav" id="siteNav">
+
             <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
             <a href="<?= BASE_URL ?>/index.php" class="<?= $halaman_ini === 'index.php' ? 'active' : '' ?>">Beranda</a>
             <a href="<?= BASE_URL ?>/siswa.php" class="<?= $halaman_ini === 'siswa.php' ? 'active' : '' ?>">Data Siswa</a>
@@ -121,6 +123,7 @@ $halaman_ini = basename($_SERVER['PHP_SELF']);
                 <?= is_admin_login() ? 'Dashboard Admin' : 'Login Admin' ?>
             </a>
         </nav>
+        
     </div>
 </header>
 

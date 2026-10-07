@@ -64,19 +64,47 @@ function is_admin_login()
 // Wajibkan login admin, kalau belum login lempar ke halaman login
 function wajib_login()
 {
-    if (!is_admin_login()) {
-        header('Location: ' . BASE_URL . '/login.php');
-        exit;
+    if (is_admin_login()) {
+        if(!is_admin_login()) {
+            session_destroy();
+            header('Location: ' . BASE_URL . '/login.php');
+            exit;
+        }
+       
     }
 }
 
 // Path gambar dengan fallback ke gambar placeholder jika file tidak ada
 function foto_url($folder, $namafile, $placeholder = 'placeholder.png')
 {
-    if (!empty($namafile) && file_exists(__DIR__ . '/../uploads/' . $folder . '/' . $namafile)) {
-        return BASE_URL . '/uploads/' . $folder . '/' . $namafile;
+    static $indeks_file = [];
+
+    if (!empty($namafile)) {
+        $nama_aman = basename($namafile);
+        $direktori = __DIR__ . '/../uploads/' . $folder;
+        $path = $direktori . '/' . $nama_aman;
+
+        if (is_file($path)) {
+            return BASE_URL . '/uploads/' . rawurlencode($folder) . '/' . rawurlencode($nama_aman);
+        }
+
+        // Server Linux membedakan huruf besar/kecil; cocokkan nama file tanpa
+        // membedakan kapitalisasi agar file seperti .JPG tetap ditemukan.
+        if (!isset($indeks_file[$folder])) {
+            $indeks_file[$folder] = [];
+            foreach (@scandir($direktori) ?: [] as $file) {
+                if ($file !== '.' && $file !== '..' && is_file($direktori . '/' . $file)) {
+                    $indeks_file[$folder][strtolower($file)] = $file;
+                }
+            }
+        }
+
+        $nama_aktual = $indeks_file[$folder][strtolower($nama_aman)] ?? null;
+        if ($nama_aktual !== null) {
+            return BASE_URL . '/uploads/' . rawurlencode($folder) . '/' . rawurlencode($nama_aktual);
+        }
     }
-    return BASE_URL . '/assets/img/' . $placeholder;
+    return BASE_URL . '/assets/img/' . rawurlencode($placeholder);
 }
 
 // Cek apakah file logo kelas ada di server (dipakai untuk fallback ke huruf inisial)

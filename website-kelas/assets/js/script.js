@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var tersimpan = null;
             try { tersimpan = JSON.parse(sessionStorage.getItem(KEY) || 'null'); } catch (e) {}
 
-            if (window.innerWidth > 720) {
+            if (window.innerWidth > 980) {
                 if (tersimpan) {
                     letakkan(tersimpan, false); // mulai dari posisi terakhir (halaman sebelumnya)
                     requestAnimationFrame(function () {
@@ -177,9 +177,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Saat resize, langsung pindah tanpa animasi (hindari kesan "loncat aneh")
         window.addEventListener('resize', function () {
             var aktif = nav.querySelector('a.active');
-            if (aktif && window.innerWidth > 720) {
+            if (aktif && window.innerWidth > 980) {
                 letakkan(posisi(aktif), false);
-            } else if (window.innerWidth <= 720) {
+            } else if (window.innerWidth <= 980) {
                 indikator.style.opacity = '0';
             }
         });
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // supaya halaman berikutnya tahu harus mulai geser dari mana.
         nav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
-                if (window.innerWidth > 720) {
+                if (window.innerWidth > 980) {
                     sessionStorage.setItem(KEY, JSON.stringify(posisi(link)));
                 }
             });
