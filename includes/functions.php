@@ -64,14 +64,14 @@ function is_admin_login()
 // Wajibkan login admin, kalau belum login lempar ke halaman login
 function wajib_login()
 {
-    if (is_admin_login()) {
+  
         if(!is_admin_login()) {
             session_destroy();
             header('Location: ' . BASE_URL . '/login.php');
             exit;
         }
        
-    }
+    
 }
 
 // Path gambar dengan fallback ke gambar placeholder jika file tidak ada

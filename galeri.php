@@ -28,7 +28,15 @@ require_once __DIR__ . '/includes/header.php';
             <div class="grid grid-3">
                 <?php foreach ($daftar_galeri as $g): ?>
                     <div class="gallery-item">
-                        <img src="<?= foto_url('galeri', $g['gambar']) ?>" alt="<?= h($g['judul'] ?: 'Foto galeri') ?>" loading="lazy">
+                         <?php if ($g['tipe_media'] === 'video'): ?>
+                        <video controls style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px; margin-bottom:10px;">
+                            <source src="<?= $g['gambar'] ?>" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <?php else:?>
+                    <img src="<?=  $g['gambar']?>" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px; margin-bottom:10px;">
+                    <?php endif;?>
+                        
                         <?php if (!empty($g['judul'])): ?>
                             <div class="gallery-caption"><?= h($g['judul']) ?></div>
                         <?php endif; ?>

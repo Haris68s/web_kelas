@@ -45,7 +45,7 @@ require_once __DIR__ . '/includes/header.php';
                         <img class="student-photo" src="<?= foto_url('siswa', $s['foto']) ?>" alt="Foto <?= h($s['nama']) ?>">
                         <h3><?= h($s['nama']) ?></h3>
                         <p style="color:var(--color-text-muted); font-size:0.85rem;">
-                            NIS: <?= h($s['nis'] ?: '-') ?> &middot; <?= $s['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan' ?>
+                          &middot; <?= $s['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan' ?>
                         </p>
                         <?php if (!empty($s['jabatan'])): ?>
                             <div class="badge" style="margin-top:10px;"><?= h($s['jabatan']) ?></div>

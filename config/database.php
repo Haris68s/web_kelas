@@ -1,16 +1,22 @@
 <?php
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
+$dotenv->load();
+
 /**
  * Konfigurasi koneksi database.
  * Ubah 4 nilai di bawah ini sesuai pengaturan MySQL di komputer/hosting kamu.
  */
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'website_kelas');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', $_ENV['DATABASE_HOST'] );
+define('DB_NAME', $_ENV['DATABASE_NAME'] );
+define('DB_USER', $_ENV['DATABASE_USERNAME'] );
+define('DB_PASS', $_ENV['DATABASE_PASSWORD'] );
 
 try {
     $pdo = new PDO(
-        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+        'pgsql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';port=' . $_ENV['DATABASE_PORT'] . ';sslmode=require',
         DB_USER,
         DB_PASS,
         [

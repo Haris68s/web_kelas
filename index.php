@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
@@ -104,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
                     <div class="card student-card">
                         <img class="student-photo" src="<?= foto_url('siswa', $s['foto']) ?>" alt="Foto <?= h($s['nama']) ?>">
                         <h3><?= h($s['nama']) ?></h3>
-                        <p style="color:var(--color-text-muted); font-size:0.85rem;">NIS: <?= h($s['nis'] ?: '-') ?></p>
+                        
                         <?php if (!empty($s['jabatan'])): ?>
                             <span class="badge"><?= h($s['jabatan']) ?></span>
                         <?php endif; ?>

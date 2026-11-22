@@ -27,6 +27,7 @@
     --color-text: #1c2130;
     --color-text-muted: #656b7a;
     --color-text-on-primary: #ffffff;
+    
 
     /* Tipografi */
     --font-heading: 'Poppins', system-ui, sans-serif;
@@ -262,7 +263,8 @@ table {color: var(--color-text); border-collapse: collapse; width: 100%; font-si
    HERO / BERANDA
    ========================================================= */
 .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    /* background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); */
+    background: var(--color-primary);
     color: var(--color-text-on-primary);
     padding: 64px 0 88px;
 }
@@ -386,7 +388,7 @@ table {color: var(--color-text); border-collapse: collapse; width: 100%; font-si
 .badge {
     display: inline-block;
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-text-on-primary);
     font-size: 0.75rem;
     font-weight: 600;
     padding: 4px 10px;

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/functions.php';
+is_admin_login();
 wajib_login();
 
 $judul_halaman = 'Dashboard';
