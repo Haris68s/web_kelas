@@ -5,12 +5,12 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/functions.php';
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 wajib_login();
 
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
-$dotenv->load();
+$dotenv->safeload();
 
 $judul_halaman = 'Galeri Kelas';
 $folder_upload = __DIR__ . '/../uploads/galeri/';
