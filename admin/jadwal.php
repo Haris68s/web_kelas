@@ -95,7 +95,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-$semua_jadwal = $pdo->query('SELECT * FROM jadwal ORDER BY FIELD(hari,"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"), jam_mulai ASC')->fetchAll();
+$semua_jadwal = $pdo->query("
+    SELECT * FROM jadwal 
+    ORDER BY CASE hari 
+        WHEN 'Senin' THEN 1 
+        WHEN 'Selasa' THEN 2 
+        WHEN 'Rabu' THEN 3 
+        WHEN 'Kamis' THEN 4 
+        WHEN 'Jumat' THEN 5 
+        WHEN 'Sabtu' THEN 6 
+        ELSE 7 
+    END, jam_mulai ASC
+")->fetchAll();
 
 require_once __DIR__ . '/../includes/admin_header.php';
 ?>

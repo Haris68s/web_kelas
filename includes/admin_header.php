@@ -35,8 +35,9 @@ $menu_admin = [
 
 <div class="mobile-topbar">
     <strong><?= h($nama_kelas) ?> · Admin</strong>
-    <button id="sidebarToggle" class="btn btn-outline btn-sm" style="color:#fff; border-color:rgba(255,255,255,0.5);">☰</button>
+    <button id="sidebarToggle" class="btn btn-outline btn-sm" type="button" aria-label="Buka menu" aria-controls="adminSidebar" aria-expanded="false" style="color:#fff; border-color:rgba(255,255,255,0.5);">☰</button>
 </div>
+<button class="admin-sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Tutup menu"></button>
 
 <div class="admin-layout">
     <aside class="admin-sidebar" id="adminSidebar">

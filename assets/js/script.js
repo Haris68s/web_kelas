@@ -44,10 +44,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle sidebar admin di tampilan HP
     var sidebarToggle = document.getElementById('sidebarToggle');
     var adminSidebar = document.getElementById('adminSidebar');
+    var sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
     if (sidebarToggle && adminSidebar) {
+        function setSidebarOpen(isOpen) {
+            adminSidebar.classList.toggle('is-open', isOpen);
+            sidebarBackdrop.classList.toggle('is-visible', isOpen);
+            sidebarToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            sidebarToggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+            sidebarToggle.textContent = isOpen ? '×' : '☰';
+        }
+
         sidebarToggle.addEventListener('click', function () {
-            adminSidebar.classList.toggle('is-open');
+            setSidebarOpen(!adminSidebar.classList.contains('is-open'));
+        });
+
+        if (sidebarBackdrop) {
+            sidebarBackdrop.addEventListener('click', function () {
+                setSidebarOpen(false);
+            });
+        }
+
+        adminSidebar.querySelectorAll('nav a').forEach(function (link) {
+            link.addEventListener('click', function () { setSidebarOpen(false); });
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') setSidebarOpen(false);
         });
     }
 
