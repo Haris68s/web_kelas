@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     curl_setopt($ch,CURLOPT_POST,1);
     curl_setopt($ch,CURLOPT_POSTFIELDS,['image'=> $nama_file]);
     $result = curl_exec($ch);
-    curl_close($ch);
+    
 
     $respon = json_decode($result,true);
 
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $result = curl_exec($ch);
-        curl_close($ch);
+        
         $respon = json_decode($result,true);
         
 
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $url_video = $respon['secure_url'];
             $public_id = $respon['public_id'];
 
-            // Simpan data video ke database
+           
             $stmt = $pdo->prepare('INSERT INTO galeri (judul, tipe_media, gambar, url_tampilan, public_id, keterangan) VALUES (?, ?, ?, ?, ?, ?)');
             $stmt->execute([$judul, 'video', $url_video, $url_video, $public_id, $keterangan]);
 
